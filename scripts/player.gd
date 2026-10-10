@@ -6,8 +6,11 @@ var move_speed = speed
 @export var decceleration_speed = 10
 @export var acceleration_speed = 10
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var shoot_timer: Timer = $ShootTimer
 
 var health = 3
+var bullet = preload("res://scenes/laser_bullet.tscn")
+var can_shoot: bool = true
 
 var character_direction: Vector2
 
@@ -20,6 +23,14 @@ func take_damage(dmg: int) -> void:
 	if health <= 0:
 		print("ded")
 
+func shoot() -> void:
+	var instance = bullet.instantiate()
+	instance.global_position = to_global(Vector2(0, -25))
+	instance.rotation = rotation - PI/2
+	get_tree().current_scene.add_child(instance)
+	can_shoot = false
+	shoot_timer.start()
+
 func _physics_process(_delta: float) -> void:
 	character_direction.x = Input.get_axis("left", "right")
 	character_direction.y = Input.get_axis("up", "down")
@@ -30,6 +41,9 @@ func _physics_process(_delta: float) -> void:
 	
 	if Input.is_action_just_released("boost"):
 		move_speed = speed
+		
+	if Input.is_action_just_pressed("shoot") and can_shoot:
+		shoot()
 	
 	if character_direction:
 		animation_player.play("move")
@@ -42,3 +56,7 @@ func _physics_process(_delta: float) -> void:
 		rotation = character_direction.angle() + PI/2
 		
 	move_and_slide()
+
+
+func _on_shoot_timer_timeout() -> void:
+	can_shoot = true

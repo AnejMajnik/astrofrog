@@ -153,3 +153,13 @@ libraries/ = SubResource("AnimationLibrary_dqkch")
 shape = SubResource("CircleShape2D_e204l")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2037491656]
+limit_left = -3584
+limit_top = -2994
+limit_right = 3584
+limit_bottom = 2994
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=1381351066]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

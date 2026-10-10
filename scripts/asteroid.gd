@@ -4,6 +4,7 @@ var direction = 0
 @export var speed = 175
 const damage = 1
 var velocity: Vector2
+var health = 50
 
 @export var max_distance := 2000
 
@@ -16,10 +17,18 @@ func _ready() -> void:
 	rotation_amount = randf_range(0.5, 4.0) * [-1, 1].pick_random()
 	rotation = randf_range(0.0, TAU)
 	
+func take_damage(damage: int) -> void:
+	health -= damage
+	
+	if health <= 0:
+		queue_free()
+	
 func _physics_process(delta: float) -> void:
 	for body in get_overlapping_bodies():
 		if body.is_in_group("player"):
 			body.take_damage(damage)
+			queue_free()
+		elif body.is_in_group("fss"):
 			queue_free()
 	
 	rotation += rotation_amount * delta

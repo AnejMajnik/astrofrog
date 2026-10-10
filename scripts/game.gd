@@ -34,7 +34,7 @@ func build_map():
 	
 func _ready() -> void:
 	build_map()
-	spawn_asteroids(50, false)
+	spawn_asteroids(25, true)
 	asteroid_spawn_timer.start()
 
 func spawn_asteroids(count: int, offscreen: bool = true):
