@@ -7,10 +7,12 @@ var move_speed = speed
 @export var acceleration_speed = 10
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var shoot_timer: Timer = $ShootTimer
+@onready var ability_timer: Timer = $AbilityTimer
 
 var health = 3
 var bullet = preload("res://scenes/laser_bullet.tscn")
 var can_shoot: bool = true
+var can_ability: bool = true
 
 var character_direction: Vector2
 
@@ -30,6 +32,21 @@ func shoot() -> void:
 	get_tree().current_scene.add_child(instance)
 	can_shoot = false
 	shoot_timer.start()
+	
+func shoot_ability() -> void:
+	for wave in 3:
+		laser_ring(12)
+		await get_tree().create_timer(0.2).timeout
+	
+	can_ability = false
+	ability_timer.start()
+		
+func laser_ring(count: int) -> void:
+	for i in count:
+		var instance = bullet.instantiate()
+		instance.global_position = global_position
+		instance.rotation = i * TAU / count
+		get_tree().current_scene.add_child(instance)
 
 func _physics_process(_delta: float) -> void:
 	character_direction.x = Input.get_axis("left", "right")
@@ -44,6 +61,9 @@ func _physics_process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("shoot") and can_shoot:
 		shoot()
+		
+	if Input.is_action_just_pressed("ability") and can_ability:
+		shoot_ability()
 	
 	if character_direction:
 		animation_player.play("move")
@@ -60,3 +80,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true
+
+
+func _on_ability_timer_timeout() -> void:
+	can_ability = true
