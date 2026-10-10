@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://d04i67lmlojl8"]
+
+[ext_resource type="PackedScene" uid="uid://bsl4l6lxm35n8" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://df3gdnuscrw5w" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://bafph5q00q4nb" path="res://assets/space_tileset.png" id="2_lnu2h"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
+texture = ExtResource("2_lnu2h")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/probability = 10.0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_nrent"]
+sources/1 = SubResource("TileSetAtlasSource_lbhrr")
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nrent"]
+
+[sub_resource type="Environment" id="Environment_nrent"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.23
+glow_strength = 1.29
+glow_hdr_threshold = 0.0
+
+[node name="Game" type="Node2D" unique_id=1135541275]
+script = ExtResource("1_yqjtg")
+
+[node name="Background" type="TileMapLayer" parent="." unique_id=1268590288]
+tile_set = SubResource("TileSet_nrent")
+
+[node name="Player" parent="." unique_id=598472088 instance=ExtResource("1_uwrxv")]
+position = Vector2(325, 324)
+
+[node name="Boundaries" type="Node2D" parent="." unique_id=1224880436]
+
+[node name="BoundaryRight" type="StaticBody2D" parent="Boundaries" unique_id=1010363771]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BoundaryRight" unique_id=1649355986]
+position = Vector2(3584, -1)
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_nrent")
+
+[node name="BoundaryUp" type="StaticBody2D" parent="Boundaries" unique_id=1381230579]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BoundaryUp" unique_id=1601719152]
+position = Vector2(0, -2994)
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_nrent")
+
+[node name="BoundaryDown" type="StaticBody2D" parent="Boundaries" unique_id=2141976373]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BoundaryDown" unique_id=1693946353]
+position = Vector2(1, 2994)
+shape = SubResource("WorldBoundaryShape2D_nrent")
+
+[node name="BoundaryLeft" type="StaticBody2D" parent="Boundaries" unique_id=1454532333]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BoundaryLeft" unique_id=766837761]
+position = Vector2(-3584, -2)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_nrent")
+
+[node name="AsteroidSpawnTimer" type="Timer" parent="." unique_id=1379870431]
+wait_time = 2.0
+one_shot = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1216752192]
+environment = SubResource("Environment_nrent")
+
+[connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
