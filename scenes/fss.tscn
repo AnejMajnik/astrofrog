@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://br75ocsh53afi"]
+
+[ext_resource type="Texture2D" uid="uid://5lluj0yiguw3" path="res://assets/fss.png" id="1_xsrpc"]
+
+[node name="FSS" type="StaticBody2D" unique_id=1428638061]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2063007878]
+texture = ExtResource("1_xsrpc")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=238452790]
+polygon = PackedVector2Array(-117, -8, -14, -9, -14, -53, -33, -55, -33, -74, 30, -74, 30, -55, 11, -55, 11, -11, 114, -9, 115, 10, 11, 10, 11, 105, -12, 105, -12, 11, -118, 11)

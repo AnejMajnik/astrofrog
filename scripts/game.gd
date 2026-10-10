@@ -1,6 +1,7 @@
 extends Node2D
 
 var asteroid = preload("res://scenes/asteroid.tscn")
+var asteroid_big = preload("res://scenes/asteroid_big.tscn")
 @onready var background: TileMapLayer = $Background
 
 var map_width_tiles: int = 500
@@ -38,7 +39,12 @@ func _ready() -> void:
 
 func spawn_asteroids(count: int, offscreen: bool = true):
 	for i in count:
-		var instance = asteroid.instantiate()
+		var instance
+		if randf_range(-1, 1) < 0.75:
+			instance = asteroid.instantiate()
+		else:
+			instance = asteroid_big.instantiate()
+			
 		if offscreen:
 			instance.position = get_offscreen_position()
 		else:

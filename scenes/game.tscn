@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bsl4l6lxm35n8" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://df3gdnuscrw5w" path="res://scripts/game.gd" id="1_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://bafph5q00q4nb" path="res://assets/space_tileset.png" id="2_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://br75ocsh53afi" path="res://scenes/fss.tscn" id="4_lbhrr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("2_lnu2h")
@@ -33,8 +34,8 @@ sources/1 = SubResource("TileSetAtlasSource_lbhrr")
 [sub_resource type="Environment" id="Environment_nrent"]
 background_mode = 3
 glow_enabled = true
-glow_intensity = 0.23
-glow_strength = 1.29
+glow_intensity = 2.26
+glow_strength = 0.85
 glow_hdr_threshold = 0.0
 
 [node name="Game" type="Node2D" unique_id=1135541275]
@@ -81,5 +82,9 @@ one_shot = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1216752192]
 environment = SubResource("Environment_nrent")
+
+[node name="StaticBody2D" parent="." unique_id=1428638061 instance=ExtResource("4_lbhrr")]
+position = Vector2(328, 515)
+scale = Vector2(2, 2)
 
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
