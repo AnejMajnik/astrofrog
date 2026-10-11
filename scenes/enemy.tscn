@@ -143,7 +143,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_e204l"]
 radius = 206.00243
 
-[node name="Enemy" type="CharacterBody2D" unique_id=1940419826]
+[node name="Enemy" type="CharacterBody2D" unique_id=1940419826 groups=["enemy"]]
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
@@ -163,10 +163,15 @@ libraries/ = SubResource("AnimationLibrary_5uy6h")
 wait_time = 3.0
 one_shot = true
 
+[node name="ShootTimer" type="Timer" parent="." unique_id=512853034]
+wait_time = 0.5
+one_shot = true
+
 [node name="AggroArea" type="Area2D" parent="." unique_id=1586698921]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroArea" unique_id=1233601502]
 shape = SubResource("CircleShape2D_e204l")
 
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="body_entered" from="AggroArea" to="." method="_on_aggro_area_body_entered"]

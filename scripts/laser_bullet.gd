@@ -15,3 +15,8 @@ func _physics_process(delta: float) -> void:
 		if body.is_in_group("asteroid"):
 			body.take_damage(damage)
 			queue_free()
+	
+	for body in get_overlapping_bodies():
+		if body.is_in_group("enemy"):
+			body.take_damage(damage)
+			queue_free()

@@ -3,6 +3,9 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var idle_timer: Timer = $IdleTimer
 @onready var player: CharacterBody2D = Autoload.player_node
+@onready var shoot_timer: Timer = $ShootTimer
+
+var bullet = preload("res://scenes/enemy_bullet.tscn")
 
 enum State { IDLE, ROAM, ATTACK, DIE }
 var current_state: State
@@ -15,12 +18,26 @@ var move_speed = 175
 var decceleration_speed = 300
 var acceleration_speed = 300
 var turn_speed = 8.0
+var can_shoot = false
+var health = 50
 
 func _ready() -> void:
 	home_location = global_position
 	other_location.x = home_location.x + [-1, 1].pick_random() * 500
 	other_location.y = home_location.y
 	change_state(State.IDLE)
+
+func take_damage(damage: int) -> void:
+	health = maxi(health - damage, 0)
+	
+	if health == 0:
+		queue_free()
+
+func shoot() -> void:
+	var instance = bullet.instantiate()
+	instance.global_position = to_global(Vector2(0, -25))
+	instance.rotation = rotation - PI/2
+	get_tree().current_scene.add_child(instance)
 
 func change_state(new_state: State) -> void:
 	current_state = new_state
@@ -34,6 +51,7 @@ func change_state(new_state: State) -> void:
 			going_to_other = !going_to_other
 		State.ATTACK:
 			animation_player.play("move")
+			can_shoot = true
 
 func _physics_process(delta: float) -> void:
 	match current_state:
@@ -47,6 +65,11 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.move_toward(Vector2(direction, 0) * move_speed, acceleration_speed * delta)
 		State.ATTACK:
 			velocity = velocity.move_toward(global_position.direction_to(player.global_position) * move_speed, acceleration_speed * delta)
+			if can_shoot:
+				shoot()
+				can_shoot = false
+				shoot_timer.start()
+				
 	move_and_slide()
 	
 	# Rotate
@@ -54,9 +77,13 @@ func _physics_process(delta: float) -> void:
 		rotation = lerp_angle(rotation, velocity.angle() + PI / 2, turn_speed * delta)
 
 func _on_idle_timer_timeout() -> void:
-	change_state(State.ROAM)
-
+	if current_state == State.IDLE:
+		change_state(State.ROAM)
 
 func _on_aggro_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		change_state(State.ATTACK)
+
+func _on_shoot_timer_timeout() -> void:
+	if current_state == State.ATTACK:
+		can_shoot = true
