@@ -9,7 +9,8 @@ var move_speed = speed
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var ability_timer: Timer = $AbilityTimer
 
-var health = 3
+var max_health = 5
+var health = max_health
 var bullet = preload("res://scenes/laser_bullet.tscn")
 var can_shoot: bool = true
 var can_ability: bool = true
@@ -34,11 +35,11 @@ func shoot() -> void:
 	shoot_timer.start()
 	
 func shoot_ability() -> void:
+	can_ability = false
 	for wave in 3:
 		laser_ring(12)
 		await get_tree().create_timer(0.2).timeout
 	
-	can_ability = false
 	ability_timer.start()
 		
 func laser_ring(count: int) -> void:
@@ -48,7 +49,7 @@ func laser_ring(count: int) -> void:
 		instance.rotation = i * TAU / count
 		get_tree().current_scene.add_child(instance)
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	character_direction.x = Input.get_axis("left", "right")
 	character_direction.y = Input.get_axis("up", "down")
 	character_direction = character_direction.normalized()
@@ -73,7 +74,7 @@ func _physics_process(_delta: float) -> void:
 		velocity = velocity.move_toward(Vector2.ZERO, decceleration_speed)
 		
 	if character_direction != Vector2.ZERO:
-		rotation = character_direction.angle() + PI/2
+		rotation = lerp_angle(rotation, character_direction.angle() + PI / 2, 10.0 * delta)
 		
 	move_and_slide()
 

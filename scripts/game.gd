@@ -10,6 +10,8 @@ var map_height_tiles: int = 400
 @export var atlas_start_coord: Vector2i = Vector2i(0, 0)
 @export var grid_size: Vector2i = Vector2i(4, 4)
 @onready var asteroid_spawn_timer: Timer = $AsteroidSpawnTimer
+@onready var ui: CanvasLayer = $UI
+@onready var player: CharacterBody2D = $Player
 
 var tile_options: Array[Vector2i] = []
 
@@ -35,6 +37,7 @@ func build_map():
 func _ready() -> void:
 	build_map()
 	spawn_asteroids(25, true)
+	ui.setup_ability(player.ability_timer)
 	asteroid_spawn_timer.start()
 
 func spawn_asteroids(count: int, offscreen: bool = true):

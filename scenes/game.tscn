@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://df3gdnuscrw5w" path="res://scripts/game.gd" id="1_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://bafph5q00q4nb" path="res://assets/space_tileset.png" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://br75ocsh53afi" path="res://scenes/fss.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://dv8pdmjopmg03" path="res://scenes/ui.tscn" id="5_iywne"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("2_lnu2h")
@@ -86,5 +87,7 @@ environment = SubResource("Environment_nrent")
 [node name="StaticBody2D" parent="." unique_id=1428638061 instance=ExtResource("4_lbhrr")]
 position = Vector2(328, 515)
 scale = Vector2(2, 2)
+
+[node name="UI" parent="." unique_id=1698748013 instance=ExtResource("5_iywne")]
 
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]

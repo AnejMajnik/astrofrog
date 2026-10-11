@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dv8pdmjopmg03"]
+
+[ext_resource type="Texture2D" uid="uid://cq4f7swlkdfv0" path="res://assets/ability.png" id="1_nt7q6"]
+[ext_resource type="Script" uid="uid://daskm3v5lxbcf" path="res://scripts/ui.gd" id="1_yev5y"]
+[ext_resource type="Script" uid="uid://tn8idc2j16j7" path="res://scenes/ability_icon.gd" id="2_x4jx1"]
+
+[node name="UI" type="CanvasLayer" unique_id=1698748013]
+script = ExtResource("1_yev5y")
+
+[node name="Control" type="Control" parent="." unique_id=580511040]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AbilityIcon" type="TextureProgressBar" parent="Control" unique_id=1338309398]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = -47.0
+offset_right = 47.0
+offset_bottom = -15.0
+grow_vertical = 0
+max_value = 1.0
+step = 0.01
+value = 1.0
+fill_mode = 3
+texture_under = ExtResource("1_nt7q6")
+texture_progress = ExtResource("1_nt7q6")
+tint_under = Color(0.2592937, 0.2592937, 0.25929365, 1)
+script = ExtResource("2_x4jx1")
