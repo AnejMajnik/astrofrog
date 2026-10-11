@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 	for body in get_overlapping_bodies():
 		if body.is_in_group("player"):
 			body.take_damage(damage)
-			queue_free()
+			take_damage(health)
 		elif body.is_in_group("fss"):
 			queue_free()
 	

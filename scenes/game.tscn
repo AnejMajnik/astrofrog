@@ -61,6 +61,7 @@ position = Vector2(325, 324)
 [node name="Boundaries" type="Node2D" parent="." unique_id=1224880436]
 
 [node name="BoundaryRight" type="StaticBody2D" parent="Boundaries" unique_id=1010363771]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BoundaryRight" unique_id=1649355986]
 position = Vector2(3584, -1)
@@ -68,6 +69,7 @@ rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_nrent")
 
 [node name="BoundaryUp" type="StaticBody2D" parent="Boundaries" unique_id=1381230579]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BoundaryUp" unique_id=1601719152]
 position = Vector2(0, -2994)
@@ -75,12 +77,14 @@ rotation = 3.1415927
 shape = SubResource("WorldBoundaryShape2D_nrent")
 
 [node name="BoundaryDown" type="StaticBody2D" parent="Boundaries" unique_id=2141976373]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BoundaryDown" unique_id=1693946353]
 position = Vector2(1, 2994)
 shape = SubResource("WorldBoundaryShape2D_nrent")
 
 [node name="BoundaryLeft" type="StaticBody2D" parent="Boundaries" unique_id=1454532333]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BoundaryLeft" unique_id=766837761]
 position = Vector2(-3584, -2)
@@ -94,7 +98,7 @@ one_shot = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1216752192]
 environment = SubResource("Environment_nrent")
 
-[node name="StaticBody2D" parent="." unique_id=1428638061 instance=ExtResource("4_lbhrr")]
+[node name="FSS" parent="." unique_id=1428638061 instance=ExtResource("4_lbhrr")]
 position = Vector2(328, 515)
 scale = Vector2(2, 2)
 

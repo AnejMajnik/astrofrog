@@ -3,8 +3,8 @@ extends CharacterBody2D
 @export var speed = 200
 var move_speed = speed
 @export var boost_speed = 400
-@export var decceleration_speed = 10
-@export var acceleration_speed = 10
+@export var decceleration_speed = 400
+@export var acceleration_speed = 400
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var ability_timer: Timer = $AbilityTimer
@@ -15,6 +15,7 @@ var health
 var bullet = preload("res://scenes/laser_bullet.tscn")
 var can_shoot: bool = true
 var can_ability: bool = true
+var push_strength = 500
 
 var character_direction: Vector2
 
@@ -78,16 +79,15 @@ func _physics_process(delta: float) -> void:
 	
 	if character_direction:
 		animation_player.play("move")
-		velocity = velocity.move_toward(character_direction * move_speed, acceleration_speed)
+		velocity = velocity.move_toward(character_direction * move_speed, acceleration_speed * delta)
 	else:
 		animation_player.play("idle")
-		velocity = velocity.move_toward(Vector2.ZERO, decceleration_speed)
+		velocity = velocity.move_toward(Vector2.ZERO, decceleration_speed * delta)
 		
 	if character_direction != Vector2.ZERO:
 		rotation = lerp_angle(rotation, character_direction.angle() + PI / 2, 10.0 * delta)
 		
 	move_and_slide()
-
 
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true

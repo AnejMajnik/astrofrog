@@ -70,7 +70,7 @@ script = ExtResource("2_x4jx1")
 [node name="ItemsBar" type="HBoxContainer" parent="Control" unique_id=347977703]
 layout_mode = 1
 offset_left = 20.0
-offset_top = 20.0
+offset_top = 15.0
 offset_right = 60.0
-offset_bottom = 60.0
+offset_bottom = 55.0
 theme_override_constants/separation = 10

@@ -7,7 +7,7 @@
 size = Vector2(2, 8)
 
 [node name="LaserBullet" type="Area2D" unique_id=1147035502]
-collision_mask = 2
+collision_mask = 6
 script = ExtResource("1_wti7u")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1602845232]
@@ -16,4 +16,5 @@ scale = Vector2(2.5, 2.5)
 texture = ExtResource("1_mrcvo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=853219398]
+scale = Vector2(2.5, 2.5)
 shape = SubResource("RectangleShape2D_nrent")

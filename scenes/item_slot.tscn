@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://css5lhepu6r2"]
 
 [ext_resource type="Script" uid="uid://biyuoxywvshxd" path="res://scripts/item_slot.gd" id="1_567tv"]
+[ext_resource type="FontFile" uid="uid://cmm611amhioui" path="res://assets/fonts/PixelatedEleganceRegular-ovawB.ttf" id="2_eqbkm"]
 
 [node name="ItemSlot" type="VBoxContainer" unique_id=624275580]
 offset_right = 40.0
@@ -16,5 +17,6 @@ stretch_mode = 5
 
 [node name="Amount" type="Label" parent="." unique_id=1964929536]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_fonts/font = ExtResource("2_eqbkm")
+theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1

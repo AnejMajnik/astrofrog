@@ -2,6 +2,7 @@ extends Node2D
 
 var asteroid = preload("res://scenes/asteroid.tscn")
 var asteroid_big = preload("res://scenes/asteroid_big.tscn")
+var enemy = preload("res://scenes/enemy.tscn")
 @onready var background: TileMapLayer = $Background
 
 var map_width_tiles: int = 500
@@ -43,6 +44,7 @@ func build_map():
 func _ready() -> void:
 	build_map()
 	spawn_asteroids(25, true)
+	spawn_enemies(20, false)
 	ui.setup_ability(player.ability_timer)
 	player.health_changed.connect(ui.set_health)
 	player.died.connect(_on_player_died)
@@ -73,6 +75,16 @@ func spawn_asteroids(count: int, offscreen: bool = true):
 			instance.position = get_offscreen_position()
 		else:
 			instance.position = Vector2(randf_range(-2000, 2000), randf_range(-1000, 1000))
+		add_child(instance)
+		
+func spawn_enemies(count: int, offscreen: bool = true):
+	for i in count:
+		var instance = enemy.instantiate()
+		
+		if offscreen:
+			instance.position = get_offscreen_position()
+		else:
+			instance.position = Vector2(randf_range(-3000, 3000), randf_range(-2000, 2000))
 		add_child(instance)
 
 func get_offscreen_position(margin := 100) -> Vector2:
