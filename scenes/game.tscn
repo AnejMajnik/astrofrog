@@ -2,9 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://bsl4l6lxm35n8" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://df3gdnuscrw5w" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="Script" uid="uid://dwbhyqi040nwn" path="res://resources/ore_data.gd" id="2_0tnpc"]
+[ext_resource type="Resource" uid="uid://bcq2vu7v5d2kr" path="res://resources/ore_normal.tres" id="2_gee14"]
 [ext_resource type="Texture2D" uid="uid://bafph5q00q4nb" path="res://assets/space_tileset.png" id="2_lnu2h"]
+[ext_resource type="Resource" uid="uid://cejdklas32s4h" path="res://resources/ore_amethyst.tres" id="3_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://br75ocsh53afi" path="res://scenes/fss.tscn" id="4_lbhrr"]
+[ext_resource type="Resource" uid="uid://d8kkr6f8yunh" path="res://resources/ore_emerald.tres" id="4_vtaks"]
 [ext_resource type="PackedScene" uid="uid://dv8pdmjopmg03" path="res://scenes/ui.tscn" id="5_iywne"]
+[ext_resource type="Resource" uid="uid://bc0mpm25j4mns" path="res://resources/ore_ruby.tres" id="6_vtaks"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("2_lnu2h")
@@ -41,6 +46,11 @@ glow_hdr_threshold = 0.0
 
 [node name="Game" type="Node2D" unique_id=1135541275]
 script = ExtResource("1_yqjtg")
+ores = Array[ExtResource("2_0tnpc")]([ExtResource("2_gee14"), ExtResource("3_0tnpc"), ExtResource("4_vtaks"), ExtResource("6_vtaks")])
+ore_normal = ExtResource("2_gee14")
+ore_amethyst = ExtResource("3_0tnpc")
+ore_emerald = ExtResource("4_vtaks")
+ore_ruby = ExtResource("6_vtaks")
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=1268590288]
 tile_set = SubResource("TileSet_nrent")

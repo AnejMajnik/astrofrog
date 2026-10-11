@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://c6sag2shd3vwe"]
+
+[ext_resource type="Texture2D" uid="uid://8ya63avywcxo" path="res://assets/emerald.png" id="1_82vvt"]
+[ext_resource type="Script" uid="uid://cww2u5o327ehm" path="res://resources/item_data.gd" id="1_c5k2f"]
+
+[resource]
+script = ExtResource("1_c5k2f")
+display_name = "Emerald"
+icon = ExtResource("1_82vvt")
+metadata/_custom_type_script = "uid://cww2u5o327ehm"

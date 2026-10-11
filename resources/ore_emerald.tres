@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="OreData" format=3 uid="uid://d8kkr6f8yunh"]
+
+[ext_resource type="Texture2D" uid="uid://da4gak5gj05t7" path="res://assets/asteroid_big_emeraldt.png" id="1_5h86x"]
+[ext_resource type="Script" uid="uid://dwbhyqi040nwn" path="res://resources/ore_data.gd" id="1_no4t6"]
+[ext_resource type="Resource" uid="uid://c6sag2shd3vwe" path="res://resources/item_emerald.tres" id="2_diw48"]
+[ext_resource type="Texture2D" uid="uid://dpewtmqjbpdma" path="res://assets/asteroid_emerald.png" id="4_nlt4d"]
+
+[resource]
+script = ExtResource("1_no4t6")
+small_texture = ExtResource("4_nlt4d")
+big_texture = ExtResource("1_5h86x")
+item = ExtResource("2_diw48")
+metadata/_custom_type_script = "uid://dwbhyqi040nwn"

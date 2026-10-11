@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://css5lhepu6r2"]
+
+[ext_resource type="Script" uid="uid://biyuoxywvshxd" path="res://scripts/item_slot.gd" id="1_567tv"]
+
+[node name="ItemSlot" type="VBoxContainer" unique_id=624275580]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_567tv")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=477519355]
+texture_filter = 1
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Amount" type="Label" parent="." unique_id=1964929536]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1

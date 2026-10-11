@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="OreData" format=3 uid="uid://cejdklas32s4h"]
+
+[ext_resource type="Texture2D" uid="uid://dt7ofcf3aubtd" path="res://assets/asteroid_big_amethyst.png" id="1_lk5kk"]
+[ext_resource type="Script" uid="uid://dwbhyqi040nwn" path="res://resources/ore_data.gd" id="1_ujhsc"]
+[ext_resource type="Resource" uid="uid://dv8kjhexwky3r" path="res://resources/item_amethyst.tres" id="2_n01ub"]
+[ext_resource type="Texture2D" uid="uid://1ps12vjpuiq" path="res://assets/asteroid_amethyst.png" id="3_n01ub"]
+
+[resource]
+script = ExtResource("1_ujhsc")
+small_texture = ExtResource("3_n01ub")
+big_texture = ExtResource("1_lk5kk")
+item = ExtResource("2_n01ub")
+metadata/_custom_type_script = "uid://dwbhyqi040nwn"

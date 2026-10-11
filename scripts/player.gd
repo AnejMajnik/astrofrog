@@ -8,22 +8,32 @@ var move_speed = speed
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var ability_timer: Timer = $AbilityTimer
+@onready var inventory: Inventory = $Inventory
 
 var max_health = 5
-var health = max_health
+var health
 var bullet = preload("res://scenes/laser_bullet.tscn")
 var can_shoot: bool = true
 var can_ability: bool = true
 
 var character_direction: Vector2
 
+signal health_changed(current: int, maximum: int)
+signal died
+
 func _ready() -> void:
 	Autoload.player_node = self
+	health = max_health
 
 func take_damage(dmg: int) -> void:
-	health -= dmg
-	
 	if health <= 0:
+		return
+		
+	health = clampi(health - dmg, 0, max_health)
+	health_changed.emit(health, max_health)
+	
+	if health == 0:
+		died.emit()
 		print("ded")
 
 func shoot() -> void:
@@ -37,16 +47,16 @@ func shoot() -> void:
 func shoot_ability() -> void:
 	can_ability = false
 	for wave in 3:
-		laser_ring(12)
+		laser_ring(12, wave * TAU / 36)
 		await get_tree().create_timer(0.2).timeout
 	
 	ability_timer.start()
 		
-func laser_ring(count: int) -> void:
+func laser_ring(count: int, offset := 0.0) -> void:
 	for i in count:
 		var instance = bullet.instantiate()
 		instance.global_position = global_position
-		instance.rotation = i * TAU / count
+		instance.rotation = offset + i * TAU / count
 		get_tree().current_scene.add_child(instance)
 
 func _physics_process(delta: float) -> void:

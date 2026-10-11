@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dv8kjhexwky3r"]
+
+[ext_resource type="Script" uid="uid://cww2u5o327ehm" path="res://resources/item_data.gd" id="1_2536s"]
+[ext_resource type="Texture2D" uid="uid://dqatvbqqr4lf2" path="res://assets/amethyst.png" id="1_mlxhp"]
+
+[resource]
+script = ExtResource("1_2536s")
+display_name = "Amethyst"
+icon = ExtResource("1_mlxhp")
+metadata/_custom_type_script = "uid://cww2u5o327ehm"

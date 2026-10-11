@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="OreData" format=3 uid="uid://bc0mpm25j4mns"]
+
+[ext_resource type="Script" uid="uid://dwbhyqi040nwn" path="res://resources/ore_data.gd" id="1_31y0h"]
+[ext_resource type="Texture2D" uid="uid://8mj8wk2eojnw" path="res://assets/asteroid_big_ruby.png" id="1_niqar"]
+[ext_resource type="Resource" uid="uid://b4oeursth0cli" path="res://resources/item_ruby.tres" id="2_1cuqo"]
+[ext_resource type="Texture2D" uid="uid://5helcwpmmtb3" path="res://assets/asteroid_ruby.png" id="4_d56n8"]
+
+[resource]
+script = ExtResource("1_31y0h")
+small_texture = ExtResource("4_d56n8")
+big_texture = ExtResource("1_niqar")
+item = ExtResource("2_1cuqo")
+metadata/_custom_type_script = "uid://dwbhyqi040nwn"

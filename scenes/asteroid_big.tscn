@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://by040qg8veiey"]
 
-[ext_resource type="Script" uid="uid://dndbsdm7c1icf" path="res://scripts/asteroid_big.gd" id="1_5y4ff"]
+[ext_resource type="Script" uid="uid://bqodosbmqpj86" path="res://scripts/asteroid.gd" id="1_5y4ff"]
 [ext_resource type="Texture2D" uid="uid://yqtugrx7sg4q" path="res://assets/asteroid_big.png" id="2_e88pg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nrent"]
@@ -10,6 +10,11 @@ height = 100.0
 [node name="AsteroidBig" type="Area2D" unique_id=2080279659 groups=["asteroid"]]
 collision_layer = 2
 script = ExtResource("1_5y4ff")
+speed = 125
+health = 100
+max_distance = null
+big = true
+drop_amount = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1808645928]
 texture = ExtResource("2_e88pg")
