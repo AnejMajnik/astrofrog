@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cq4f7swlkdfv0" path="res://assets/ability.png" id="1_nt7q6"]
 [ext_resource type="Script" uid="uid://daskm3v5lxbcf" path="res://scripts/ui.gd" id="1_yev5y"]
 [ext_resource type="Script" uid="uid://cww2u5o327ehm" path="res://resources/item_data.gd" id="2_8dubc"]
-[ext_resource type="Script" uid="uid://tn8idc2j16j7" path="res://scenes/ability_icon.gd" id="2_x4jx1"]
+[ext_resource type="Script" uid="uid://tn8idc2j16j7" path="res://scripts/ability_icon.gd" id="2_x4jx1"]
 [ext_resource type="Resource" uid="uid://dv8kjhexwky3r" path="res://resources/item_amethyst.tres" id="3_p7vwb"]
 [ext_resource type="Resource" uid="uid://c6sag2shd3vwe" path="res://resources/item_emerald.tres" id="4_ktti3"]
 [ext_resource type="Resource" uid="uid://b4oeursth0cli" path="res://resources/item_ruby.tres" id="5_p7vwb"]

@@ -12,6 +12,6 @@ func _physics_process(delta: float) -> void:
 	position += velocity * delta
 	
 	for body in get_overlapping_bodies():
-		if body.is_in_group("player"):
+		if body.is_in_group("player") or body.is_in_group("antenna"):
 			body.take_damage(damage)
 			queue_free()

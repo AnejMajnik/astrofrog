@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://d8kkr6f8yunh" path="res://resources/ore_emerald.tres" id="4_vtaks"]
 [ext_resource type="PackedScene" uid="uid://dv8pdmjopmg03" path="res://scenes/ui.tscn" id="5_iywne"]
 [ext_resource type="Resource" uid="uid://bc0mpm25j4mns" path="res://resources/ore_ruby.tres" id="6_vtaks"]
+[ext_resource type="PackedScene" uid="uid://bts2jrmpmxk00" path="res://scenes/antenna.tscn" id="9_kvpfn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("2_lnu2h")
@@ -43,6 +44,9 @@ glow_enabled = true
 glow_intensity = 2.26
 glow_strength = 0.85
 glow_hdr_threshold = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nrent"]
+radius = 58.034473
 
 [node name="Game" type="Node2D" unique_id=1135541275]
 script = ExtResource("1_yqjtg")
@@ -91,6 +95,10 @@ position = Vector2(-3584, -2)
 rotation = 1.5707964
 shape = SubResource("WorldBoundaryShape2D_nrent")
 
+[node name="Antenna" parent="Boundaries" unique_id=1687680367 instance=ExtResource("9_kvpfn")]
+position = Vector2(238, 329)
+scale = Vector2(2, 2)
+
 [node name="AsteroidSpawnTimer" type="Timer" parent="." unique_id=1379870431]
 wait_time = 2.0
 one_shot = true
@@ -104,4 +112,12 @@ scale = Vector2(2, 2)
 
 [node name="UI" parent="." unique_id=1698748013 instance=ExtResource("5_iywne")]
 
+[node name="DepositArea" type="Area2D" parent="." unique_id=304205329]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DepositArea" unique_id=139494217]
+position = Vector2(235, 316)
+shape = SubResource("CircleShape2D_nrent")
+
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
+[connection signal="body_entered" from="DepositArea" to="." method="_on_deposit_area_body_entered"]
+[connection signal="body_exited" from="DepositArea" to="." method="_on_deposit_area_body_exited"]

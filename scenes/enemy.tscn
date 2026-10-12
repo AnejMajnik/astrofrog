@@ -164,7 +164,7 @@ wait_time = 3.0
 one_shot = true
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=512853034]
-wait_time = 0.5
+wait_time = 2.5
 one_shot = true
 
 [node name="AggroArea" type="Area2D" parent="." unique_id=1586698921]

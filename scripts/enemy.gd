@@ -7,9 +7,9 @@ extends CharacterBody2D
 
 var bullet = preload("res://scenes/enemy_bullet.tscn")
 
-enum State { IDLE, ROAM, ATTACK, DIE }
+enum State { IDLE, ROAM, ATTACK, RETURN, DIE }
 var current_state: State
-var home_location: Vector2
+var home_location: Vector2 
 var other_location: Vector2
 var target_location: Vector2
 var going_to_other := true
@@ -34,10 +34,12 @@ func take_damage(damage: int) -> void:
 		queue_free()
 
 func shoot() -> void:
-	var instance = bullet.instantiate()
-	instance.global_position = to_global(Vector2(0, -25))
-	instance.rotation = rotation - PI/2
-	get_tree().current_scene.add_child(instance)
+	for i in 3:
+		var instance = bullet.instantiate()
+		instance.global_position = to_global(Vector2(0, -25))
+		instance.rotation = rotation - PI/2
+		get_tree().current_scene.add_child(instance)
+		await get_tree().create_timer(0.20).timeout
 
 func change_state(new_state: State) -> void:
 	current_state = new_state
@@ -64,11 +66,17 @@ func _physics_process(delta: float) -> void:
 				change_state(State.IDLE)
 			velocity = velocity.move_toward(Vector2(direction, 0) * move_speed, acceleration_speed * delta)
 		State.ATTACK:
+			if global_position.distance_to(player.global_position) > 300:
+				change_state(State.RETURN)
 			velocity = velocity.move_toward(global_position.direction_to(player.global_position) * move_speed, acceleration_speed * delta)
 			if can_shoot:
 				shoot()
 				can_shoot = false
 				shoot_timer.start()
+		State.RETURN:
+			if global_position.distance_to(home_location) < 5:
+				change_state(State.ROAM)
+			velocity = velocity.move_toward(global_position.direction_to(home_location) * move_speed, acceleration_speed * delta)
 				
 	move_and_slide()
 	

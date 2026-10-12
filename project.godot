@@ -13,6 +13,7 @@ config_version=5
 config/name="Astrofrog"
 run/main_scene="uid://d04i67lmlojl8"
 config/features=PackedStringArray("4.7", "Forward Plus")
+run/max_fps=240
 config/icon="res://icon.svg"
 
 [autoload]
@@ -43,6 +44,7 @@ player=""
 fss=""
 asteroid=""
 enemy=""
+antenna=""
 
 [input]
 

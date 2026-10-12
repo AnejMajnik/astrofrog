@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://bts2jrmpmxk00"]
+
+[ext_resource type="Texture2D" uid="uid://cfagtgatryqva" path="res://assets/antenna.png" id="1_cymb1"]
+[ext_resource type="Script" uid="uid://bybr15n087jn6" path="res://scripts/antenna.gd" id="1_lyb31"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyb31"]
+atlas = ExtResource("1_cymb1")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwh18"]
+atlas = ExtResource("1_cymb1")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nrent"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyb31")
+}],
+"loop": 1,
+"name": &"broken",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwh18")
+}],
+"loop": 1,
+"name": &"repaired",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nrent"]
+radius = 6.706011
+height = 30.44632
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lyb31"]
+bg_color = Color(0.4006977, 0.40069774, 0.40069756, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dwh18"]
+bg_color = Color(0.9882353, 0.011764706, 0.1254902, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="Antenna" type="StaticBody2D" unique_id=1687680367 groups=["antenna"]]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_lyb31")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1562087144]
+sprite_frames = SubResource("SpriteFrames_nrent")
+animation = &"repaired"
+offset = Vector2(-3, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1127478129]
+rotation = 1.0995574
+shape = SubResource("CapsuleShape2D_nrent")
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=385471202 groups=["antenna"]]
+offset_left = -7.0
+offset_top = -15.0
+offset_right = 18.0
+offset_bottom = -12.0
+theme_override_styles/background = SubResource("StyleBoxFlat_lyb31")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dwh18")
+show_percentage = false

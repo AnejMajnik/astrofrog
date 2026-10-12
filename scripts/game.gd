@@ -13,6 +13,7 @@ var map_height_tiles: int = 400
 @onready var asteroid_spawn_timer: Timer = $AsteroidSpawnTimer
 @onready var ui: CanvasLayer = $UI
 @onready var player: CharacterBody2D = $Player
+@onready var deposit_area: Area2D = $DepositArea
 
 @export var ores: Array[OreData]
 @export var ore_normal: OreData
@@ -95,3 +96,12 @@ func get_offscreen_position(margin := 100) -> Vector2:
 func _on_asteroid_spawn_timer_timeout() -> void:
 	spawn_asteroids(7)
 	asteroid_spawn_timer.start()
+	
+func _on_deposit_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		print("player entered")
+
+
+func _on_deposit_area_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		print("player exited")
