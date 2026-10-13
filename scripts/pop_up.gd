@@ -13,7 +13,7 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("exit"):
 		close()
 
-func open(title: String, body: String, button_defs: Array = [{"id": "close", "text": "Close"}]) -> void:
+func open(title: String, body: String, button_defs: Array = [{"id": "close", "title": "Close"}]) -> void:
 	title_label.text = title
 	body_label.text = body
 	for child in buttons.get_children():

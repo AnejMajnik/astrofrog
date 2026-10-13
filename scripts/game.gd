@@ -62,6 +62,10 @@ func _ready() -> void:
 	asteroid_spawn_timer.start()
 	ui.set_health(player.health, player.max_health)
 	ui.setup_inventory(player.inventory)
+	start_story()
+
+func start_story() -> void:
+	pop_up.open("Welcome", "Welcome to Astro Frog.\nThe Frog Space Station (FSS) has lost signal with the earth\nbecause of an asteroid impact.", [{"id": "story1", "text": "Next"}])
 
 func _on_player_died() -> void:
 	print("game_over")
@@ -134,3 +138,26 @@ func _on_pop_up_button_pressed(id: String) -> void:
 		player.inventory.remove(ITEM_RUBY, need)
 		Autoload.change_stage(Autoload.Stage.DEFEND)
 		antenna.disable_deposit_area()
+		pop_up.open(
+			"Oh Nooo", 
+			"Watch out, the enemies are swarming.\nDefend the antenna until the repair is done!.",
+			[{"id": "close", "text": "Close"}]
+		)
+	elif id == "story1":
+		pop_up.open(
+			"We Have a Problem", 
+			"The antenna we use to communicate\nwith the earth has been damaged.\n", 
+			[{"id": "story2", "text": "Next"}]
+		)
+	elif id == "story2":
+		pop_up.open(
+			"The Repair", 
+			"To repair it, we need precious minerals.\nCollect:\n5 Amethyst, 5 Emerald and 5 Ruby\nfrom asteroids to initiate repair.", 
+			[{"id": "story3", "text": "Next"}]
+		)
+	elif id == "story3":
+		pop_up.open(
+			"Good Luck", 
+			"Oh, and be careful.\nThere are evil frogs, looking for those precious minerals.", 
+			[{"id": "story4", "text": "Done"}]
+		)
