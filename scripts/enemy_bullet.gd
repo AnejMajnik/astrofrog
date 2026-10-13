@@ -4,9 +4,11 @@ var velocity: Vector2
 var speed := 500.0
 var damage: int = 1
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var laser_sound: AudioStreamPlayer2D = $LaserSound
 
 func _ready() -> void:
 	velocity = Vector2.from_angle(rotation) * speed
+	laser_sound.play()
 
 func _physics_process(delta: float) -> void:
 	position += velocity * delta

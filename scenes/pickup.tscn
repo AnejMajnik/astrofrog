@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b2hi6ku1e4r7m"]
 
 [ext_resource type="Script" uid="uid://c244t4y4cmw7t" path="res://scripts/pickup.gd" id="1_pg2rt"]
+[ext_resource type="AudioStream" uid="uid://cqsrq0uj2u4ns" path="res://assets/sounds/pickup.wav" id="2_7cqbe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nrent"]
 radius = 40.012497
@@ -12,3 +13,6 @@ script = ExtResource("1_pg2rt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1766878083]
 shape = SubResource("CircleShape2D_nrent")
+
+[node name="PickupSound" type="AudioStreamPlayer2D" parent="." unique_id=1252559004]
+stream = ExtResource("2_7cqbe")

@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dv8pdmjopmg03" path="res://scenes/ui.tscn" id="5_iywne"]
 [ext_resource type="Resource" uid="uid://bc0mpm25j4mns" path="res://resources/ore_ruby.tres" id="6_vtaks"]
 [ext_resource type="PackedScene" uid="uid://bts2jrmpmxk00" path="res://scenes/antenna.tscn" id="9_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://v2ceqqek2y4u" path="res://scenes/pop_up.tscn" id="12_dinhu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("2_lnu2h")
@@ -45,9 +46,6 @@ glow_intensity = 2.26
 glow_strength = 0.85
 glow_hdr_threshold = 0.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_nrent"]
-radius = 58.034473
-
 [node name="Game" type="Node2D" unique_id=1135541275]
 script = ExtResource("1_yqjtg")
 ores = Array[ExtResource("2_0tnpc")]([ExtResource("2_gee14"), ExtResource("3_0tnpc"), ExtResource("4_vtaks"), ExtResource("6_vtaks")])
@@ -61,11 +59,12 @@ tile_set = SubResource("TileSet_nrent")
 
 [node name="Player" parent="." unique_id=598472088 instance=ExtResource("1_uwrxv")]
 position = Vector2(325, 324)
+collision_mask = 23
 
 [node name="Boundaries" type="Node2D" parent="." unique_id=1224880436]
 
 [node name="BoundaryRight" type="StaticBody2D" parent="Boundaries" unique_id=1010363771]
-collision_layer = 8
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BoundaryRight" unique_id=1649355986]
 position = Vector2(3584, -1)
@@ -73,7 +72,7 @@ rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_nrent")
 
 [node name="BoundaryUp" type="StaticBody2D" parent="Boundaries" unique_id=1381230579]
-collision_layer = 8
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BoundaryUp" unique_id=1601719152]
 position = Vector2(0, -2994)
@@ -81,23 +80,19 @@ rotation = 3.1415927
 shape = SubResource("WorldBoundaryShape2D_nrent")
 
 [node name="BoundaryDown" type="StaticBody2D" parent="Boundaries" unique_id=2141976373]
-collision_layer = 8
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BoundaryDown" unique_id=1693946353]
 position = Vector2(1, 2994)
 shape = SubResource("WorldBoundaryShape2D_nrent")
 
 [node name="BoundaryLeft" type="StaticBody2D" parent="Boundaries" unique_id=1454532333]
-collision_layer = 8
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BoundaryLeft" unique_id=766837761]
 position = Vector2(-3584, -2)
 rotation = 1.5707964
 shape = SubResource("WorldBoundaryShape2D_nrent")
-
-[node name="Antenna" parent="Boundaries" unique_id=1687680367 instance=ExtResource("9_kvpfn")]
-position = Vector2(238, 329)
-scale = Vector2(2, 2)
 
 [node name="AsteroidSpawnTimer" type="Timer" parent="." unique_id=1379870431]
 wait_time = 2.0
@@ -110,14 +105,14 @@ environment = SubResource("Environment_nrent")
 position = Vector2(328, 515)
 scale = Vector2(2, 2)
 
+[node name="Antenna" parent="." unique_id=1687680367 instance=ExtResource("9_kvpfn")]
+position = Vector2(238, 329)
+scale = Vector2(2, 2)
+
 [node name="UI" parent="." unique_id=1698748013 instance=ExtResource("5_iywne")]
 
-[node name="DepositArea" type="Area2D" parent="." unique_id=304205329]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DepositArea" unique_id=139494217]
-position = Vector2(235, 316)
-shape = SubResource("CircleShape2D_nrent")
+[node name="PopUp" parent="." unique_id=1719169293 instance=ExtResource("12_dinhu")]
 
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
-[connection signal="body_entered" from="DepositArea" to="." method="_on_deposit_area_body_entered"]
-[connection signal="body_exited" from="DepositArea" to="." method="_on_deposit_area_body_exited"]
+[connection signal="show_popup_antenna" from="Antenna" to="." method="_on_antenna_show_popup_antenna"]
+[connection signal="button_pressed" from="PopUp" to="." method="_on_pop_up_button_pressed"]

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://61mw4sl3hj1y" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://dr7k1nn6yxs2v" path="res://assets/space_ship.png" id="2_g2els"]
 [ext_resource type="Script" uid="uid://daxttuicdi6s" path="res://scripts/inventory.gd" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://sxbsvifu23ou" path="res://assets/sounds/laser.wav" id="4_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
 atlas = ExtResource("2_g2els")
@@ -165,12 +166,15 @@ wait_time = 0.2
 one_shot = true
 
 [node name="AbilityTimer" type="Timer" parent="." unique_id=124917685]
-wait_time = 20.0
+wait_time = 10.0
 one_shot = true
 
 [node name="Inventory" type="Node" parent="." unique_id=1949461251]
 script = ExtResource("3_qhqgy")
 metadata/_custom_type_script = "uid://daxttuicdi6s"
+
+[node name="LaserSound" type="AudioStreamPlayer2D" parent="." unique_id=2131816649]
+stream = ExtResource("4_dqkch")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="AbilityTimer" to="." method="_on_ability_timer_timeout"]

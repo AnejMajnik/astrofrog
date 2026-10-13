@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://v2ceqqek2y4u"]
+
+[ext_resource type="FontFile" uid="uid://cmm611amhioui" path="res://assets/fonts/PixelatedEleganceRegular-ovawB.ttf" id="1_ui8ff"]
+[ext_resource type="Script" uid="uid://b67h8bwij0ehv" path="res://scripts/pop_up.gd" id="1_vln5t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vln5t"]
+bg_color = Color(0.122622035, 0.13504532, 0.106964655, 1)
+
+[node name="PopUp" type="CanvasLayer" unique_id=1719169293]
+process_mode = 3
+script = ExtResource("1_vln5t")
+
+[node name="Control" type="Control" parent="." unique_id=1133648321]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=1504215990]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vln5t")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer" unique_id=169728207]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer" unique_id=492878640]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=87436754]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ui8ff")
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=640758154]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Body" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=1584089968]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ui8ff")
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+
+[node name="Spacer2" type="Control" parent="Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=1379449980]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=813388356]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1

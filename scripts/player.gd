@@ -9,6 +9,7 @@ var move_speed = speed
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var ability_timer: Timer = $AbilityTimer
 @onready var inventory: Inventory = $Inventory
+@onready var laser_sound: AudioStreamPlayer2D = $LaserSound
 
 var max_health = 5
 var health
@@ -42,6 +43,7 @@ func shoot() -> void:
 	instance.global_position = to_global(Vector2(0, -25))
 	instance.rotation = rotation - PI/2
 	get_tree().current_scene.add_child(instance)
+	laser_sound.play()
 	can_shoot = false
 	shoot_timer.start()
 	
@@ -58,6 +60,7 @@ func laser_ring(count: int, offset := 0.0) -> void:
 		var instance = bullet.instantiate()
 		instance.global_position = global_position
 		instance.rotation = offset + i * TAU / count
+		laser_sound.play()
 		get_tree().current_scene.add_child(instance)
 
 func _physics_process(delta: float) -> void:

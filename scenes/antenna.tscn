@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cfagtgatryqva" path="res://assets/antenna.png" id="1_cymb1"]
 [ext_resource type="Script" uid="uid://bybr15n087jn6" path="res://scripts/antenna.gd" id="1_lyb31"]
+[ext_resource type="FontFile" uid="uid://cmm611amhioui" path="res://assets/fonts/PixelatedEleganceRegular-ovawB.ttf" id="3_dwh18"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lyb31"]
 atlas = ExtResource("1_cymb1")
@@ -48,6 +49,9 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_lyb31"]
+radius = 30.016663
+
 [node name="Antenna" type="StaticBody2D" unique_id=1687680367 groups=["antenna"]]
 collision_layer = 8
 collision_mask = 0
@@ -70,3 +74,21 @@ offset_bottom = -12.0
 theme_override_styles/background = SubResource("StyleBoxFlat_lyb31")
 theme_override_styles/fill = SubResource("StyleBoxFlat_dwh18")
 show_percentage = false
+
+[node name="DepositArea" type="Area2D" parent="." unique_id=1219559347]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DepositArea" unique_id=1294242475]
+shape = SubResource("CircleShape2D_lyb31")
+
+[node name="Notice" type="Label" parent="." unique_id=714948913]
+visible = false
+offset_left = -19.0
+offset_top = -26.0
+offset_right = 21.0
+offset_bottom = -3.0
+theme_override_fonts/font = ExtResource("3_dwh18")
+theme_override_font_sizes/font_size = 8
+text = "Press E"
+
+[connection signal="body_entered" from="DepositArea" to="." method="_on_deposit_area_body_entered"]
+[connection signal="body_exited" from="DepositArea" to="." method="_on_deposit_area_body_exited"]

@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://e0tjriovoxp4" path="res://assets/red_laser.png" id="1_d2qol"]
 [ext_resource type="Script" uid="uid://d3dvwl5ambn4g" path="res://scripts/enemy_bullet.gd" id="1_qx7rs"]
+[ext_resource type="AudioStream" uid="uid://sxbsvifu23ou" path="res://assets/sounds/laser.wav" id="3_38r62"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nrent"]
 size = Vector2(2, 8)
@@ -19,3 +20,6 @@ texture = ExtResource("1_d2qol")
 rotation = 1.5707964
 scale = Vector2(2.5, 2.5)
 shape = SubResource("RectangleShape2D_nrent")
+
+[node name="LaserSound" type="AudioStreamPlayer2D" parent="." unique_id=1049448883]
+stream = ExtResource("3_38r62")

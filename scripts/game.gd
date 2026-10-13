@@ -13,13 +13,23 @@ var map_height_tiles: int = 400
 @onready var asteroid_spawn_timer: Timer = $AsteroidSpawnTimer
 @onready var ui: CanvasLayer = $UI
 @onready var player: CharacterBody2D = $Player
-@onready var deposit_area: Area2D = $DepositArea
+@onready var pop_up: CanvasLayer = $PopUp
+@onready var antenna: StaticBody2D = $Antenna
 
 @export var ores: Array[OreData]
 @export var ore_normal: OreData
 @export var ore_amethyst: OreData
 @export var ore_emerald: OreData
 @export var ore_ruby: OreData
+
+const ITEM_AMETHYST = preload("uid://dv8kjhexwky3r")
+const ITEM_EMERALD = preload("uid://c6sag2shd3vwe")
+const ITEM_RUBY = preload("uid://b4oeursth0cli")
+
+var need: int = 1
+var emerald_count: int = 0
+var ruby_count: int = 0
+var amethyst_count: int = 0
 
 var tile_options: Array[Vector2i] = []
 
@@ -44,8 +54,8 @@ func build_map():
 	
 func _ready() -> void:
 	build_map()
-	spawn_asteroids(25, true)
-	spawn_enemies(20, false)
+	spawn_asteroids(50, true)
+	spawn_enemies(10, true)
 	ui.setup_ability(player.ability_timer)
 	player.health_changed.connect(ui.set_health)
 	player.died.connect(_on_player_died)
@@ -88,20 +98,39 @@ func spawn_enemies(count: int, offscreen: bool = true):
 			instance.position = Vector2(randf_range(-3000, 3000), randf_range(-2000, 2000))
 		add_child(instance)
 
-func get_offscreen_position(margin := 100) -> Vector2:
+func get_offscreen_position(margin := 100, spread := 1500) -> Vector2:
 	var rect: Rect2 = get_canvas_transform().affine_inverse() * get_viewport_rect()
-	var radius := rect.size.length() / 2.0 + margin
+	var radius := rect.size.length() / 2.0 + margin + randf_range(0.0, spread)
 	return rect.get_center() + Vector2.from_angle(randf_range(0.0, TAU)) * radius
 
 func _on_asteroid_spawn_timer_timeout() -> void:
-	spawn_asteroids(7)
+	spawn_asteroids(10, true)
 	asteroid_spawn_timer.start()
 	
-func _on_deposit_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		print("player entered")
+func _on_antenna_show_popup_antenna(should_show: bool) -> void:
+	pop_up.visible = should_show
+	amethyst_count = player.inventory.get_amount(ITEM_AMETHYST)
+	ruby_count = player.inventory.get_amount(ITEM_RUBY)
+	emerald_count = player.inventory.get_amount(ITEM_EMERALD)
+	
+	if amethyst_count >= need and ruby_count >= need and emerald_count >= need:
+		pop_up.open(
+			"Deposit materials to fix the antenna",
+			"Amethyst: %d / %d\nEmerald: %d / %d\nRuby: %d / %d" % [amethyst_count, need, emerald_count, need, ruby_count, need],
+			[{"id": "deposit", "text": "Deposit"}, {"id": "close", "text": "Close"}]
+		)
+	else:
+		pop_up.open(
+			"Deposit materials to fix the antenna",
+			"Amethyst: %d / %d\nEmerald: %d / %d\nRuby: %d / %d" % [amethyst_count, need, emerald_count, need, ruby_count, need],
+			[{"id": "close", "text": "Close"}]
+		)
 
 
-func _on_deposit_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		print("player exited")
+func _on_pop_up_button_pressed(id: String) -> void:
+	if id == "deposit":
+		player.inventory.remove(ITEM_AMETHYST, need)
+		player.inventory.remove(ITEM_EMERALD, need)
+		player.inventory.remove(ITEM_RUBY, need)
+		Autoload.change_stage(Autoload.Stage.DEFEND)
+		antenna.disable_deposit_area()
