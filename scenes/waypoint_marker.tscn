@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b8vcu2b58ld0v"]
+
+[ext_resource type="Texture2D" uid="uid://dcthg51ld7qj2" path="res://assets/marker.png" id="1_ov4de"]
+[ext_resource type="Script" uid="uid://cglkhumqpihvw" path="res://scripts/waypoint_marker.gd" id="2_otagc"]
+
+[node name="WaypointMarker" type="Sprite2D" unique_id=974906603]
+modulate = Color(0.54901963, 0.9529412, 0.16470589, 1)
+z_index = 30
+texture = ExtResource("1_ov4de")
+script = ExtResource("2_otagc")

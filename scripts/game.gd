@@ -130,7 +130,6 @@ func _on_antenna_show_popup_antenna(should_show: bool) -> void:
 			[{"id": "close", "text": "Close"}]
 		)
 
-
 func _on_pop_up_button_pressed(id: String) -> void:
 	if id == "deposit":
 		player.inventory.remove(ITEM_AMETHYST, need)

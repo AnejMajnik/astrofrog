@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cfagtgatryqva" path="res://assets/antenna.png" id="1_cymb1"]
 [ext_resource type="Script" uid="uid://bybr15n087jn6" path="res://scripts/antenna.gd" id="1_lyb31"]
 [ext_resource type="FontFile" uid="uid://cmm611amhioui" path="res://assets/fonts/PixelatedEleganceRegular-ovawB.ttf" id="3_dwh18"]
+[ext_resource type="PackedScene" uid="uid://b8vcu2b58ld0v" path="res://scenes/waypoint_marker.tscn" id="4_e3nv8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lyb31"]
 atlas = ExtResource("1_cymb1")
@@ -89,6 +90,13 @@ offset_bottom = -3.0
 theme_override_fonts/font = ExtResource("3_dwh18")
 theme_override_font_sizes/font_size = 8
 text = "Press E"
+
+[node name="WaypointMarker" parent="." unique_id=974906603 instance=ExtResource("4_e3nv8")]
+position = Vector2(0, -21)
+scale = Vector2(0.5, 0.5)
+on_screen_offset = Vector2(0.5, -50)
+screen_margin = 20.0
+smoothing_speed = 100.0
 
 [connection signal="body_entered" from="DepositArea" to="." method="_on_deposit_area_body_entered"]
 [connection signal="body_exited" from="DepositArea" to="." method="_on_deposit_area_body_exited"]

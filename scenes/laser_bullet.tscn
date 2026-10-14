@@ -19,3 +19,19 @@ texture = ExtResource("1_mrcvo")
 rotation = 1.5707964
 scale = Vector2(2.5, 2.5)
 shape = SubResource("RectangleShape2D_nrent")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=355304262]
+position = Vector2(11, 0)
+emitting = false
+amount = 5
+lifetime = 0.1
+randomness = 0.29
+emission_shape = 1
+emission_sphere_radius = 6.0
+spread = 98.61
+gravity = Vector2(980, 0)
+angular_velocity_min = -174.55
+angular_velocity_max = 68.87
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+color = Color(0.54901963, 0.9529412, 0.16470589, 1)
