@@ -113,6 +113,12 @@ scale = Vector2(2, 2)
 
 [node name="PopUp" parent="." unique_id=1719169293 instance=ExtResource("12_dinhu")]
 
+[node name="EnemyDefendSpawnTimer" type="Timer" parent="." unique_id=1880030010]
+wait_time = 8.0
+one_shot = true
+
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
 [connection signal="show_popup_antenna" from="Antenna" to="." method="_on_antenna_show_popup_antenna"]
+[connection signal="timer_ended" from="UI" to="." method="_on_ui_timer_ended"]
 [connection signal="button_pressed" from="PopUp" to="." method="_on_pop_up_button_pressed"]
+[connection signal="timeout" from="EnemyDefendSpawnTimer" to="." method="_on_enemy_defend_spawn_timer_timeout"]

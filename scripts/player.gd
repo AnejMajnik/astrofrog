@@ -10,6 +10,7 @@ var move_speed = speed
 @onready var ability_timer: Timer = $AbilityTimer
 @onready var inventory: Inventory = $Inventory
 @onready var laser_sound: AudioStreamPlayer2D = $LaserSound
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var max_health = 5
 var health
@@ -27,12 +28,21 @@ func _ready() -> void:
 	Autoload.player_node = self
 	health = max_health
 
+func flash_take_damage() -> void:
+	animated_sprite.material.set_shader_parameter("flash_color", Color(1.0, 1.0, 1.0, 1.0))
+	var tween = create_tween()
+	tween.tween_method(_set_flash, 1.0, 0.0, 0.2)
+
+func _set_flash(value: float) -> void:
+	animated_sprite.material.set_shader_parameter("flash_amount", value)
+
 func take_damage(dmg: int) -> void:
 	if health <= 0:
 		return
 		
 	health = clampi(health - dmg, 0, max_health)
 	health_changed.emit(health, max_health)
+	flash_take_damage()
 	
 	if health == 0:
 		died.emit()

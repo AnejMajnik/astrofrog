@@ -2,6 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bqodosbmqpj86" path="res://scripts/asteroid.gd" id="1_6mo6b"]
 [ext_resource type="Texture2D" uid="uid://bc33m74butwh8" path="res://assets/asteroid.png" id="2_6mo6b"]
+[ext_resource type="Shader" uid="uid://dqw2qkbfur5g4" path="res://shaders/flash.gdshader" id="2_t4se3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nrent"]
+shader = ExtResource("2_t4se3")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_amount = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lnu2h"]
 radius = 13.0
@@ -11,6 +17,7 @@ collision_layer = 2
 script = ExtResource("1_6mo6b")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1808645928]
+material = SubResource("ShaderMaterial_nrent")
 position = Vector2(-1, -1)
 texture = ExtResource("2_6mo6b")
 

@@ -2,8 +2,14 @@
 
 [ext_resource type="Script" uid="uid://61mw4sl3hj1y" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://dr7k1nn6yxs2v" path="res://assets/space_ship.png" id="2_g2els"]
+[ext_resource type="Shader" uid="uid://dqw2qkbfur5g4" path="res://shaders/flash.gdshader" id="2_qlg0r"]
 [ext_resource type="Script" uid="uid://daxttuicdi6s" path="res://scripts/inventory.gd" id="3_qhqgy"]
 [ext_resource type="AudioStream" uid="uid://sxbsvifu23ou" path="res://assets/sounds/laser.wav" id="4_dqkch"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ra3w"]
+shader = ExtResource("2_qlg0r")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
 atlas = ExtResource("2_g2els")
@@ -146,6 +152,7 @@ motion_mode = 1
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1595338254]
+material = SubResource("ShaderMaterial_4ra3w")
 sprite_frames = SubResource("SpriteFrames_nrent")
 animation = &"idle"
 
@@ -175,6 +182,7 @@ metadata/_custom_type_script = "uid://daxttuicdi6s"
 
 [node name="LaserSound" type="AudioStreamPlayer2D" parent="." unique_id=2131816649]
 stream = ExtResource("4_dqkch")
+bus = &"SFX"
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="AbilityTimer" to="." method="_on_ability_timer_timeout"]

@@ -16,3 +16,4 @@ shape = SubResource("CircleShape2D_nrent")
 
 [node name="PickupSound" type="AudioStreamPlayer2D" parent="." unique_id=1252559004]
 stream = ExtResource("2_7cqbe")
+bus = &"SFX"

@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://by040qg8veiey"]
 
 [ext_resource type="Script" uid="uid://bqodosbmqpj86" path="res://scripts/asteroid.gd" id="1_5y4ff"]
+[ext_resource type="Shader" uid="uid://dqw2qkbfur5g4" path="res://shaders/flash.gdshader" id="2_5ah36"]
 [ext_resource type="Texture2D" uid="uid://yqtugrx7sg4q" path="res://assets/asteroid_big.png" id="2_e88pg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t4se3"]
+shader = ExtResource("2_5ah36")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_amount = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nrent"]
 radius = 13.0
@@ -12,11 +18,11 @@ collision_layer = 2
 script = ExtResource("1_5y4ff")
 speed = 125
 health = 100
-max_distance = null
 big = true
 drop_amount = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1808645928]
+material = SubResource("ShaderMaterial_t4se3")
 texture = ExtResource("2_e88pg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=170404639]

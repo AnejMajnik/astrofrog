@@ -5,13 +5,14 @@ extends StaticBody2D
 @onready var notice: Label = $Notice
 @onready var deposit_area: Area2D = $DepositArea
 
-var max_health := 20
+var max_health := 50
 var health = max_health
 var player_in_area := false
 
 signal show_popup_antenna(should_show: bool)
 
 func _ready() -> void:
+	Autoload.antenna_node = self
 	animated_sprite_2d.play("broken")
 	health_bar.max_value = max_health
 	health_bar.value = health

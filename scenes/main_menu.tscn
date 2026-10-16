@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dv8188pxgor3s"]
+
+[ext_resource type="Script" uid="uid://cehvhpb4irlvx" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+
+[node name="Main Menu" type="CanvasLayer" unique_id=137135772]
+script = ExtResource("1_l6cm7")
+
+[node name="Control" type="Control" parent="." unique_id=1377932296]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Control" unique_id=1236953985]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -114.0
+offset_top = 50.0
+offset_right = 114.0
+offset_bottom = 79.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.54901963, 0.9529412, 0.16470589, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "Astro Frog"
+
+[node name="Play" type="Button" parent="Control" unique_id=1785979854]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -60.0
+offset_right = 40.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PLAY"
+
+[node name="Settings" type="Button" parent="Control" unique_id=2087344236]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = -12.5
+offset_right = 57.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "SETTINGS"
+
+[node name="Exit" type="Button" parent="Control" unique_id=1703425928]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = 40.0
+offset_right = 37.5
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "EXIT"
+
+[connection signal="pressed" from="Control/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Control/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/Exit" to="." method="_on_exit_pressed"]

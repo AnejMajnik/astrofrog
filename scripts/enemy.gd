@@ -4,10 +4,12 @@ extends CharacterBody2D
 @onready var idle_timer: Timer = $IdleTimer
 @onready var player: CharacterBody2D = Autoload.player_node
 @onready var shoot_timer: Timer = $ShootTimer
+@onready var antenna: Node2D = Autoload.antenna_node
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var bullet = preload("res://scenes/enemy_bullet.tscn")
 
-enum State { IDLE, ROAM, ATTACK, RETURN, DIE }
+enum State { IDLE, ROAM, CHASE, ATTACK, RETURN, DIE }
 var current_state: State
 var home_location: Vector2 
 var other_location: Vector2
@@ -29,6 +31,7 @@ func _ready() -> void:
 
 func take_damage(damage: int) -> void:
 	health = maxi(health - damage, 0)
+	flash_take_damage()
 	
 	if health == 0:
 		queue_free()
@@ -40,6 +43,14 @@ func shoot() -> void:
 		instance.rotation = rotation - PI/2
 		get_tree().current_scene.add_child(instance)
 		await get_tree().create_timer(0.20).timeout
+
+func flash_take_damage() -> void:
+	animated_sprite.material.set_shader_parameter("flash_color", Color(1.0, 1.0, 1.0, 1.0))
+	var tween = create_tween()
+	tween.tween_method(_set_flash, 1.0, 0.0, 0.2)
+
+func _set_flash(value: float) -> void:
+	animated_sprite.material.set_shader_parameter("flash_amount", value)
 
 func change_state(new_state: State) -> void:
 	current_state = new_state
@@ -65,10 +76,32 @@ func _physics_process(delta: float) -> void:
 			if abs(distance) <= move_speed * delta:
 				change_state(State.IDLE)
 			velocity = velocity.move_toward(Vector2(direction, 0) * move_speed, acceleration_speed * delta)
+		State.CHASE:
+			if Autoload.current_stage == Autoload.Stage.COLLECT:
+				if global_position.distance_to(player.global_position) > 300:
+					change_state(State.RETURN)
+				elif global_position.distance_to(player.global_position) < 200:
+					change_state(State.ATTACK) 
+				else:
+					velocity = velocity.move_toward(global_position.direction_to(player.global_position) * move_speed, acceleration_speed * delta)
+					
+			if Autoload.current_stage == Autoload.Stage.DEFEND:
+				if global_position.distance_to(antenna.global_position) < 200:
+					change_state(State.ATTACK)
+				else:
+					velocity = velocity.move_toward(global_position.direction_to(antenna.global_position) * move_speed, acceleration_speed * delta)
+					
 		State.ATTACK:
-			if global_position.distance_to(player.global_position) > 300:
-				change_state(State.RETURN)
-			velocity = velocity.move_toward(global_position.direction_to(player.global_position) * move_speed, acceleration_speed * delta)
+			velocity = velocity.move_toward(Vector2.ZERO, decceleration_speed * delta)
+			
+			if Autoload.current_stage == Autoload.Stage.COLLECT:
+				if global_position.distance_to(player.global_position) > 300:
+					change_state(State.RETURN)
+				elif global_position.distance_to(player.global_position) > 200:
+					change_state(State.CHASE)
+				var target_angle := global_position.direction_to(player.global_position).angle() + PI / 2
+				rotation = lerp_angle(rotation, target_angle, turn_speed * delta)
+			
 			if can_shoot:
 				shoot()
 				can_shoot = false
@@ -86,12 +119,16 @@ func _physics_process(delta: float) -> void:
 
 func _on_idle_timer_timeout() -> void:
 	if current_state == State.IDLE:
-		change_state(State.ROAM)
+		if Autoload.current_stage == Autoload.Stage.COLLECT:
+			change_state(State.ROAM)
+		elif Autoload.current_stage == Autoload.Stage.DEFEND:
+			change_state(State.CHASE)
 
 func _on_aggro_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		change_state(State.ATTACK)
+	if body.is_in_group("player") and Autoload.current_stage == Autoload.Stage.COLLECT:
+		change_state(State.CHASE)
 
 func _on_shoot_timer_timeout() -> void:
 	if current_state == State.ATTACK:
 		can_shoot = true
+	

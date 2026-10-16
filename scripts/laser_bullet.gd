@@ -11,21 +11,21 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	position += velocity * delta
-	
-	for body in get_overlapping_areas():
-		if body.is_in_group("asteroid"):
-			body.take_damage(damage)
-			set_deferred("monitoring", false)
-			sprite_2d.hide()
-			cpu_particles_2d.emitting = true
-			await get_tree().create_timer(cpu_particles_2d.lifetime).timeout
-			queue_free()
-	
-	for body in get_overlapping_bodies():
-		if body.is_in_group("enemy"):
-			body.take_damage(damage)
-			set_deferred("monitoring", false)
-			sprite_2d.hide()
-			cpu_particles_2d.emitting = true
-			await get_tree().create_timer(cpu_particles_2d.lifetime).timeout
-			queue_free()
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		body.take_damage(damage)
+		set_deferred("monitoring", false)
+		sprite_2d.hide()
+		cpu_particles_2d.emitting = true
+		await get_tree().create_timer(cpu_particles_2d.lifetime).timeout
+		queue_free()
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("asteroid"):
+		area.take_damage(damage)
+		set_deferred("monitoring", false)
+		sprite_2d.hide()
+		cpu_particles_2d.emitting = true
+		await get_tree().create_timer(cpu_particles_2d.lifetime).timeout
+		queue_free()

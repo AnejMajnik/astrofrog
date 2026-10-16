@@ -74,3 +74,36 @@ offset_top = 15.0
 offset_right = 60.0
 offset_bottom = 55.0
 theme_override_constants/separation = 10
+
+[node name="Notice" type="Label" parent="Control" unique_id=45926637]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -74.0
+offset_top = 5.0
+offset_right = 74.0
+offset_bottom = 20.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "Under Attack"
+
+[node name="Timer" type="Label" parent="Control" unique_id=367369445]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -12.0
+offset_top = 25.0
+offset_right = 12.0
+offset_bottom = 40.0
+grow_horizontal = 2
+text = "00"
+
+[node name="DefendTimer" type="Timer" parent="." unique_id=1028320539]
+wait_time = 60.0
+one_shot = true
+
+[connection signal="timeout" from="DefendTimer" to="." method="_on_defend_timer_timeout"]

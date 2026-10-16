@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Astrofrog"
-run/main_scene="uid://d04i67lmlojl8"
+run/main_scene="uid://dv8188pxgor3s"
 config/features=PackedStringArray("4.7", "Forward Plus")
 run/max_fps=240
 config/icon="res://icon.svg"
@@ -35,7 +35,8 @@ folder_colors={
 "res://assets/": "red",
 "res://resources/": "blue",
 "res://scenes/": "yellow",
-"res://scripts/": "green"
+"res://scripts/": "green",
+"res://shaders/": "pink"
 }
 
 [global_group]

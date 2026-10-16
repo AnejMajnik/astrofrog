@@ -15,6 +15,7 @@ var map_height_tiles: int = 400
 @onready var player: CharacterBody2D = $Player
 @onready var pop_up: CanvasLayer = $PopUp
 @onready var antenna: StaticBody2D = $Antenna
+@onready var enemy_defend_spawn_timer: Timer = $EnemyDefendSpawnTimer
 
 @export var ores: Array[OreData]
 @export var ore_normal: OreData
@@ -32,6 +33,8 @@ var ruby_count: int = 0
 var amethyst_count: int = 0
 
 var tile_options: Array[Vector2i] = []
+
+var spawn_rect := Rect2(Vector2(-1000, -1700), Vector2(2000, 1000))
 
 func build_map():
 	for x in range(grid_size.x):
@@ -53,6 +56,7 @@ func build_map():
 			background.set_cell(Vector2i(x, y), 1 , random_tile)
 	
 func _ready() -> void:
+	Autoload.won = false
 	build_map()
 	spawn_asteroids(50, true)
 	spawn_enemies(10, true)
@@ -72,11 +76,11 @@ func _on_player_died() -> void:
 
 func pick_ore() -> OreData:
 	var roll := randf()
-	if roll < 0.85:
+	if roll < 0.1: #0.85
 		return ore_normal
-	elif roll < 0.9:
+	elif roll < 0.4: #0.9
 		return ore_amethyst
-	elif roll < 0.95:
+	elif roll < 0.7: #0.95
 		return ore_emerald
 	else:
 		return ore_ruby
@@ -101,6 +105,17 @@ func spawn_enemies(count: int, offscreen: bool = true):
 		else:
 			instance.position = Vector2(randf_range(-3000, 3000), randf_range(-2000, 2000))
 		add_child(instance)
+		
+func spawn_enemies_defend(count: int):
+	for i in count:
+		var enemy_spawn = enemy.instantiate()
+		enemy_spawn.global_position = Vector2(
+			randf_range(spawn_rect.position.x, spawn_rect.end.x),
+			randf_range(spawn_rect.position.y, spawn_rect.end.y)
+		)
+		get_tree().current_scene.add_child(enemy_spawn)
+		
+	enemy_defend_spawn_timer.start()
 
 func get_offscreen_position(margin := 100, spread := 1500) -> Vector2:
 	var rect: Rect2 = get_canvas_transform().affine_inverse() * get_viewport_rect()
@@ -116,7 +131,6 @@ func _on_antenna_show_popup_antenna(should_show: bool) -> void:
 	amethyst_count = player.inventory.get_amount(ITEM_AMETHYST)
 	ruby_count = player.inventory.get_amount(ITEM_RUBY)
 	emerald_count = player.inventory.get_amount(ITEM_EMERALD)
-	
 	if amethyst_count >= need and ruby_count >= need and emerald_count >= need:
 		pop_up.open(
 			"Deposit materials to fix the antenna",
@@ -136,7 +150,11 @@ func _on_pop_up_button_pressed(id: String) -> void:
 		player.inventory.remove(ITEM_EMERALD, need)
 		player.inventory.remove(ITEM_RUBY, need)
 		Autoload.change_stage(Autoload.Stage.DEFEND)
+		get_tree().call_group("enemy", "queue_free")
 		antenna.disable_deposit_area()
+		enemy_defend_spawn_timer.start()
+		ui.start_defense_timer()
+		
 		pop_up.open(
 			"Oh Nooo", 
 			"Watch out, the enemies are swarming.\nDefend the antenna until the repair is done!.",
@@ -160,3 +178,12 @@ func _on_pop_up_button_pressed(id: String) -> void:
 			"Oh, and be careful.\nThere are evil frogs, looking for those precious minerals.", 
 			[{"id": "story4", "text": "Done"}]
 		)
+
+
+func _on_enemy_defend_spawn_timer_timeout() -> void:
+	spawn_enemies_defend(3)
+
+
+func _on_ui_timer_ended() -> void:
+	Autoload.won = true
+	print("you won")

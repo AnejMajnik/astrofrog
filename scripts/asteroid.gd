@@ -12,6 +12,7 @@ var velocity: Vector2
 @export var drop_amount := 2
 
 @onready var player = Autoload.player_node
+@onready var sprite_2d: Sprite2D = $Sprite2D
 var rotation_amount
 
 const PICKUP_SCENE := preload("res://scenes/pickup.tscn")
@@ -23,8 +24,18 @@ func _ready() -> void:
 	rotation_amount = randf_range(0.5, 4.0) * [-1, 1].pick_random()
 	rotation = randf_range(0.0, TAU)
 	
+func flash_white() -> void:
+	sprite_2d.material.set_shader_parameter("flash_color", Color(1.0, 1.0, 1.0, 1.0))
+	
+	var tween = create_tween()
+	tween.tween_method(_set_flash, 1.0, 0.0, 0.2)
+
+func _set_flash(value: float) -> void:
+	sprite_2d.material.set_shader_parameter("flash_amount", value)
+
 func take_damage(damage: int) -> void:
 	health -= damage
+	flash_white()
 	
 	if health <= 0:
 		if ore.item:

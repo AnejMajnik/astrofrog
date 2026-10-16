@@ -2,6 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://do1c30lfsnl0a" path="res://assets/enemy_ship.png" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://dbvvqi7teuaqr" path="res://scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="Shader" uid="uid://dqw2qkbfur5g4" path="res://shaders/flash.gdshader" id="2_4ra3w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e88pg"]
+shader = ExtResource("2_4ra3w")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_md0e3"]
 atlas = ExtResource("1_7p1mj")
@@ -141,7 +147,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e204l"]
-radius = 206.00243
+radius = 260.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1940419826 groups=["enemy"]]
 collision_layer = 4
@@ -150,6 +156,7 @@ motion_mode = 1
 script = ExtResource("1_md0e3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1594765565]
+material = SubResource("ShaderMaterial_e88pg")
 sprite_frames = SubResource("SpriteFrames_nrent")
 animation = &"idle"
 

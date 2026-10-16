@@ -4,7 +4,12 @@
 [ext_resource type="Script" uid="uid://b67h8bwij0ehv" path="res://scripts/pop_up.gd" id="1_vln5t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vln5t"]
-bg_color = Color(0.122622035, 0.13504532, 0.106964655, 1)
+bg_color = Color(0.06879827, 0.06879828, 0.06879828, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.54901963, 0.9529412, 0.16470589, 1)
 
 [node name="PopUp" type="CanvasLayer" unique_id=1719169293]
 process_mode = 3
