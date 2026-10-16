@@ -18,6 +18,7 @@ var rotation_amount
 const PICKUP_SCENE := preload("res://scenes/pickup.tscn")
 
 func _ready() -> void:
+	sprite_2d.material = sprite_2d.material.duplicate()
 	$Sprite2D.texture = ore.big_texture if big else ore.small_texture
 	direction = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
 	velocity = direction * speed

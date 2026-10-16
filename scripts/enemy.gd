@@ -24,6 +24,7 @@ var can_shoot = false
 var health = 50
 
 func _ready() -> void:
+	animated_sprite.material = animated_sprite.material.duplicate()
 	home_location = global_position
 	other_location.x = home_location.x + [-1, 1].pick_random() * 500
 	other_location.y = home_location.y

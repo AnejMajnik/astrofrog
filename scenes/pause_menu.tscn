@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://bixohirs6e7v7"]
+
+[ext_resource type="Script" uid="uid://b8snqhhew6jjd" path="res://scripts/pause_menu.gd" id="1_myx47"]
+[ext_resource type="Texture2D" uid="uid://i5e5lr0sv5p5" path="res://assets/menu_bg.png" id="1_n87rw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_myx47"]
+
+[node name="Pause Menu" type="CanvasLayer" unique_id=133167598]
+process_mode = 3
+layer = 4000
+script = ExtResource("1_myx47")
+
+[node name="Control" type="Control" parent="." unique_id=703276022]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=2068005253]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("1_n87rw")
+stretch_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=660469859]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 151.0
+offset_right = 383.0
+offset_bottom = 208.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_myx47")
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/PanelContainer" unique_id=23776748]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/CenterContainer" unique_id=636967172]
+layout_mode = 2
+theme_override_constants/separation = 11
+alignment = 1
+
+[node name="Resume" type="Button" parent="Control/PanelContainer/CenterContainer/VBoxContainer" unique_id=584952072]
+unique_name_in_owner = true
+custom_maximum_size = Vector2(200, -1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.9529412, 0.16470589, 1)
+text = "RESUME"
+
+[node name="Main Menu" type="Button" parent="Control/PanelContainer/CenterContainer/VBoxContainer" unique_id=1742896138]
+unique_name_in_owner = true
+custom_maximum_size = Vector2(200, -1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.9529412, 0.16470589, 1)
+text = "MAIN MENU"
+
+[connection signal="pressed" from="Control/PanelContainer/CenterContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/CenterContainer/VBoxContainer/Main Menu" to="." method="_on_main_menu_pressed"]

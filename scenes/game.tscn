@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://d8kkr6f8yunh" path="res://resources/ore_emerald.tres" id="4_vtaks"]
 [ext_resource type="PackedScene" uid="uid://dv8pdmjopmg03" path="res://scenes/ui.tscn" id="5_iywne"]
 [ext_resource type="Resource" uid="uid://bc0mpm25j4mns" path="res://resources/ore_ruby.tres" id="6_vtaks"]
+[ext_resource type="PackedScene" uid="uid://bixohirs6e7v7" path="res://scenes/pause_menu.tscn" id="7_kvuet"]
 [ext_resource type="PackedScene" uid="uid://bts2jrmpmxk00" path="res://scenes/antenna.tscn" id="9_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://v2ceqqek2y4u" path="res://scenes/pop_up.tscn" id="12_dinhu"]
 
@@ -53,6 +54,9 @@ ore_normal = ExtResource("2_gee14")
 ore_amethyst = ExtResource("3_0tnpc")
 ore_emerald = ExtResource("4_vtaks")
 ore_ruby = ExtResource("6_vtaks")
+
+[node name="Pause Menu" parent="." unique_id=133167598 instance=ExtResource("7_kvuet")]
+process_mode = 3
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=1268590288]
 tile_set = SubResource("TileSet_nrent")
@@ -114,7 +118,7 @@ scale = Vector2(2, 2)
 [node name="PopUp" parent="." unique_id=1719169293 instance=ExtResource("12_dinhu")]
 
 [node name="EnemyDefendSpawnTimer" type="Timer" parent="." unique_id=1880030010]
-wait_time = 8.0
+wait_time = 3.0
 one_shot = true
 
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]

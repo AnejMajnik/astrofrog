@@ -66,13 +66,14 @@ func _ready() -> void:
 	asteroid_spawn_timer.start()
 	ui.set_health(player.health, player.max_health)
 	ui.setup_inventory(player.inventory)
-	start_story()
+	if !Autoload.seen_story:
+		start_story()
 
 func start_story() -> void:
 	pop_up.open("Welcome", "Welcome to Astro Frog.\nThe Frog Space Station (FSS) has lost signal with the earth\nbecause of an asteroid impact.", [{"id": "story1", "text": "Next"}])
 
 func _on_player_died() -> void:
-	get_tree().change_scene_to_file("res://scenes/end_screen.tscn")
+	get_tree().change_scene_to_file.call_deferred("res://scenes/end_screen.tscn")
 
 func pick_ore() -> OreData:
 	var roll := randf()
@@ -178,10 +179,11 @@ func _on_pop_up_button_pressed(id: String) -> void:
 			"Oh, and be careful.\nThere are evil frogs, looking for those precious minerals.", 
 			[{"id": "story4", "text": "Done"}]
 		)
+		Autoload.seen_story = true
 
 
 func _on_enemy_defend_spawn_timer_timeout() -> void:
-	spawn_enemies_defend(3)
+	spawn_enemies_defend(1)
 
 func _on_ui_timer_ended() -> void:
 	Autoload.won = true

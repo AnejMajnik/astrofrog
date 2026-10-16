@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dv8188pxgor3s"]
 
 [ext_resource type="Script" uid="uid://cehvhpb4irlvx" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://i5e5lr0sv5p5" path="res://assets/menu_bg.png" id="2_ekxnf"]
 
 [node name="Main Menu" type="CanvasLayer" unique_id=137135772]
 script = ExtResource("1_l6cm7")
@@ -12,6 +13,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=556065893]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("2_ekxnf")
+stretch_mode = 1
 
 [node name="Title" type="Label" parent="Control" unique_id=1236953985]
 layout_mode = 1
@@ -27,7 +39,7 @@ theme_override_colors/font_color = Color(0.54901963, 0.9529412, 0.16470589, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 32
-text = "Astro Frog"
+text = "ASTRO FROG"
 
 [node name="Play" type="Button" parent="Control" unique_id=1785979854]
 layout_mode = 1
@@ -42,6 +54,7 @@ offset_right = 40.0
 offset_bottom = -35.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.54901963, 0.9529412, 0.16470589, 1)
 text = "PLAY"
 
 [node name="Settings" type="Button" parent="Control" unique_id=2087344236]
@@ -57,6 +70,7 @@ offset_right = 57.5
 offset_bottom = 12.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.54901963, 0.9529412, 0.16470589, 1)
 text = "SETTINGS"
 
 [node name="Exit" type="Button" parent="Control" unique_id=1703425928]
@@ -72,6 +86,7 @@ offset_right = 37.5
 offset_bottom = 65.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.54901963, 0.9529412, 0.16470589, 1)
 text = "EXIT"
 
 [connection signal="pressed" from="Control/Play" to="." method="_on_play_pressed"]
