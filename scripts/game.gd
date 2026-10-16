@@ -72,7 +72,7 @@ func start_story() -> void:
 	pop_up.open("Welcome", "Welcome to Astro Frog.\nThe Frog Space Station (FSS) has lost signal with the earth\nbecause of an asteroid impact.", [{"id": "story1", "text": "Next"}])
 
 func _on_player_died() -> void:
-	print("game_over")
+	get_tree().change_scene_to_file("res://scenes/end_screen.tscn")
 
 func pick_ore() -> OreData:
 	var roll := randf()
@@ -183,7 +183,6 @@ func _on_pop_up_button_pressed(id: String) -> void:
 func _on_enemy_defend_spawn_timer_timeout() -> void:
 	spawn_enemies_defend(3)
 
-
 func _on_ui_timer_ended() -> void:
 	Autoload.won = true
-	print("you won")
+	get_tree().change_scene_to_file("res://scenes/end_screen.tscn")

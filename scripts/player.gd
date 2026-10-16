@@ -12,7 +12,7 @@ var move_speed = speed
 @onready var laser_sound: AudioStreamPlayer2D = $LaserSound
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-var max_health = 5
+var max_health = 10
 var health
 var bullet = preload("res://scenes/laser_bullet.tscn")
 var can_shoot: bool = true

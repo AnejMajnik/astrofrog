@@ -21,11 +21,14 @@ func take_damage(damage: int) -> void:
 	if Autoload.current_stage == Autoload.Stage.DEFEND:
 		health = maxi(health - damage, 0)
 		health_bar.value = health
+		
+		if health <= 0:
+			get_tree().change_scene_to_file("res://scenes/end_screen.tscn")
 
 func disable_deposit_area() -> void:
 	deposit_area.monitoring = false
 	
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_pressed("interact") and player_in_area:
 		show_popup_antenna.emit(true)
 
