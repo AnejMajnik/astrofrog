@@ -25,70 +25,61 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_ekxnf")
 stretch_mode = 1
 
-[node name="Title" type="Label" parent="Control" unique_id=1236953985]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=935893103]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -114.0
-offset_top = 50.0
-offset_right = 114.0
-offset_bottom = 79.0
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -55.0
+offset_right = 128.0
+offset_bottom = 55.0
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 11
+alignment = 1
+
+[node name="Title" type="Label" parent="Control/VBoxContainer" unique_id=1236953985]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.54901963, 0.9529412, 0.16470589, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 32
 text = "ASTRO FROG"
 
-[node name="Play" type="Button" parent="Control" unique_id=1785979854]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -60.0
-offset_right = 40.0
-offset_bottom = -35.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Control" type="Control" parent="Control/VBoxContainer" unique_id=2104190932]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Play" type="Button" parent="Control/VBoxContainer" unique_id=1785979854]
+custom_minimum_size = Vector2(150, 0)
+custom_maximum_size = Vector2(150, -1)
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.54901963, 0.9529412, 0.16470589, 1)
+theme_override_constants/outline_size = 4
 text = "PLAY"
 
-[node name="Settings" type="Button" parent="Control" unique_id=2087344236]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -57.5
-offset_top = -12.5
-offset_right = 57.5
-offset_bottom = 12.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Settings" type="Button" parent="Control/VBoxContainer" unique_id=2087344236]
+custom_minimum_size = Vector2(150, 0)
+custom_maximum_size = Vector2(150, -1)
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.54901963, 0.9529412, 0.16470589, 1)
+theme_override_constants/outline_size = 4
 text = "SETTINGS"
 
-[node name="Exit" type="Button" parent="Control" unique_id=1703425928]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -37.5
-offset_top = 40.0
-offset_right = 37.5
-offset_bottom = 65.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Exit" type="Button" parent="Control/VBoxContainer" unique_id=1703425928]
+custom_minimum_size = Vector2(150, 0)
+custom_maximum_size = Vector2(150, -1)
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.54901963, 0.9529412, 0.16470589, 1)
+theme_override_constants/outline_size = 4
 text = "EXIT"
 
-[connection signal="pressed" from="Control/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="Control/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="Control/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
