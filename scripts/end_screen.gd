@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var status_label: Label = $Control/StatusLabel
+@onready var status_label: Label = %StatusLabel
 
 func _ready() -> void:
 	if Autoload.won:

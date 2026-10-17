@@ -42,6 +42,7 @@ theme_override_constants/separation = 11
 alignment = 1
 
 [node name="StatusLabel" type="Label" parent="Control/VBoxContainer" unique_id=336102094]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.54901963, 0.9529412, 0.16470589, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -55,6 +56,7 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="Restart" type="Button" parent="Control/VBoxContainer" unique_id=576801529]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 custom_maximum_size = Vector2(150, -1)
 layout_mode = 2
@@ -64,6 +66,7 @@ theme_override_constants/outline_size = 4
 text = "RESTART"
 
 [node name="MainMenu" type="Button" parent="Control/VBoxContainer" unique_id=542637489]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 custom_maximum_size = Vector2(150, -1)
 layout_mode = 2

@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bixohirs6e7v7"]
 
 [ext_resource type="Script" uid="uid://b8snqhhew6jjd" path="res://scripts/pause_menu.gd" id="1_myx47"]
-[ext_resource type="Texture2D" uid="uid://i5e5lr0sv5p5" path="res://assets/menu_bg.png" id="1_n87rw"]
 
 [node name="Pause Menu" type="CanvasLayer" unique_id=133167598]
 process_mode = 3
@@ -16,16 +15,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control" unique_id=2068005253]
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1186493720]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
-texture = ExtResource("1_n87rw")
-stretch_mode = 1
+color = Color(0, 0, 0, 0.6392157)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=636967172]
 layout_mode = 1

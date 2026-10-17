@@ -6,7 +6,7 @@ extends StaticBody2D
 @onready var deposit_area: Area2D = $DepositArea
 
 var max_health := 50
-var health = max_health
+var health = 0
 var player_in_area := false
 
 signal show_popup_antenna(should_show: bool)
@@ -24,6 +24,11 @@ func take_damage(damage: int) -> void:
 		
 		if health <= 0:
 			get_tree().change_scene_to_file("res://scenes/end_screen.tscn")
+
+func transition_into_defense() -> void:
+	health = max_health
+	health_bar.value = health
+	animated_sprite_2d.play("repaired")
 
 func disable_deposit_area() -> void:
 	deposit_area.monitoring = false

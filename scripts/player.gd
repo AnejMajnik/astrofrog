@@ -18,6 +18,7 @@ var bullet = preload("res://scenes/laser_bullet.tscn")
 var can_shoot: bool = true
 var can_ability: bool = true
 var push_strength = 500
+var rotation_speed := 20.0
 
 var character_direction: Vector2
 
@@ -36,6 +37,9 @@ func flash_take_damage() -> void:
 func _set_flash(value: float) -> void:
 	animated_sprite.material.set_shader_parameter("flash_amount", value)
 
+func emit_died() -> void:
+	died.emit()
+
 func take_damage(dmg: int) -> void:
 	if health <= 0:
 		return
@@ -45,8 +49,8 @@ func take_damage(dmg: int) -> void:
 	flash_take_damage()
 	
 	if health == 0:
-		died.emit()
-		print("ded")
+		animation_player.play("dead")
+		velocity = Vector2.ZERO
 
 func shoot() -> void:
 	var instance = bullet.instantiate()
@@ -73,32 +77,38 @@ func laser_ring(count: int, offset := 0.0) -> void:
 		laser_sound.play()
 		get_tree().current_scene.add_child(instance)
 
+func _process(delta: float) -> void:
+	if velocity == Vector2.ZERO:
+		var target_angle = (get_global_mouse_position() - global_position).angle() + PI / 2
+		rotation = lerp_angle(rotation, target_angle, rotation_speed * delta)
+
 func _physics_process(delta: float) -> void:
-	character_direction.x = Input.get_axis("left", "right")
-	character_direction.y = Input.get_axis("up", "down")
-	character_direction = character_direction.normalized()
-	
-	if Input.is_action_just_pressed("boost"):
-		move_speed = boost_speed
-	
-	if Input.is_action_just_released("boost"):
-		move_speed = speed
+	if health > 0:
+		character_direction.x = Input.get_axis("left", "right")
+		character_direction.y = Input.get_axis("up", "down")
+		character_direction = character_direction.normalized()
 		
-	if Input.is_action_just_pressed("shoot") and can_shoot:
-		shoot()
+		if Input.is_action_just_pressed("boost"):
+			move_speed = boost_speed
 		
-	if Input.is_action_just_pressed("ability") and can_ability:
-		shoot_ability()
-	
-	if character_direction:
-		animation_player.play("move")
-		velocity = velocity.move_toward(character_direction * move_speed, acceleration_speed * delta)
-	else:
-		animation_player.play("idle")
-		velocity = velocity.move_toward(Vector2.ZERO, decceleration_speed * delta)
+		if Input.is_action_just_released("boost"):
+			move_speed = speed
+			
+		if Input.is_action_just_pressed("shoot") and can_shoot:
+			shoot()
+			
+		if Input.is_action_just_pressed("ability") and can_ability:
+			shoot_ability()
 		
-	if character_direction != Vector2.ZERO:
-		rotation = lerp_angle(rotation, character_direction.angle() + PI / 2, 10.0 * delta)
+		if character_direction:
+			animation_player.play("move")
+			velocity = velocity.move_toward(character_direction * move_speed, acceleration_speed * delta)
+		else:
+			animation_player.play("idle")
+			velocity = velocity.move_toward(Vector2.ZERO, decceleration_speed * delta)
+			
+		if character_direction != Vector2.ZERO:
+			rotation = lerp_angle(rotation, character_direction.angle() + PI / 2, 10.0 * delta)
 		
 	move_and_slide()
 

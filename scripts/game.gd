@@ -70,18 +70,18 @@ func _ready() -> void:
 		start_story()
 
 func start_story() -> void:
-	pop_up.open("Welcome", "Welcome to Astro Frog.\nThe Frog Space Station (FSS) has lost signal with the earth\nbecause of an asteroid impact.", [{"id": "story1", "text": "Next"}])
+	pop_up.open("Welcome", "Welcome to Astro Frog.\nThe Frog Space Station (FSS) has ran out of resources.\nWe need to get out of here.", [{"id": "story1", "text": "Next"}])
 
 func _on_player_died() -> void:
 	get_tree().change_scene_to_file.call_deferred("res://scenes/end_screen.tscn")
 
 func pick_ore() -> OreData:
 	var roll := randf()
-	if roll < 0.1: #0.85
+	if roll < 0.7:
 		return ore_normal
-	elif roll < 0.4: #0.9
+	elif roll < 0.8:
 		return ore_amethyst
-	elif roll < 0.7: #0.95
+	elif roll < 0.9:
 		return ore_emerald
 	else:
 		return ore_ruby
@@ -155,6 +155,7 @@ func _on_pop_up_button_pressed(id: String) -> void:
 		antenna.disable_deposit_area()
 		enemy_defend_spawn_timer.start()
 		ui.start_defense_timer()
+		antenna.transition_into_defense()
 		
 		pop_up.open(
 			"Oh Nooo", 
@@ -164,27 +165,32 @@ func _on_pop_up_button_pressed(id: String) -> void:
 	elif id == "story1":
 		pop_up.open(
 			"We Have a Problem", 
-			"The antenna we use to communicate\nwith the earth has been damaged.\n", 
+			"The antenna we use to communicate\nhas been damaged, so we cannot contact earth.", 
 			[{"id": "story2", "text": "Next"}]
 		)
 	elif id == "story2":
 		pop_up.open(
 			"The Repair", 
-			"To repair it, we need precious minerals.\nCollect:\n5 Amethyst, 5 Emerald and 5 Ruby\nfrom asteroids to initiate repair.", 
+			"To repair it, we need precious minerals.\nCollect: 5 Amethyst, 5 Emerald and 5 Ruby\nfrom asteroids to initiate a repair.", 
 			[{"id": "story3", "text": "Next"}]
 		)
 	elif id == "story3":
 		pop_up.open(
 			"Good Luck", 
-			"Oh, and be careful.\nThere are evil frogs, looking for those precious minerals.", 
+			"Oh, and be careful.\nThere are frog space pirates lurking around.", 
 			[{"id": "story4", "text": "Done"}]
 		)
 		Autoload.seen_story = true
-
+	elif id == "win":
+		get_tree().change_scene_to_file("res://scenes/end_screen.tscn")
 
 func _on_enemy_defend_spawn_timer_timeout() -> void:
 	spawn_enemies_defend(1)
 
 func _on_ui_timer_ended() -> void:
 	Autoload.won = true
-	get_tree().change_scene_to_file("res://scenes/end_screen.tscn")
+	pop_up.open(
+		"We are Saved",
+		"The antenna has been fixed!\nNow we can finally send a signal back to earth\nand get out of here.",
+		[{"id": "win", "text": "Done"}]
+	)

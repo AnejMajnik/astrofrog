@@ -56,7 +56,6 @@ ore_emerald = ExtResource("4_vtaks")
 ore_ruby = ExtResource("6_vtaks")
 
 [node name="Pause Menu" parent="." unique_id=133167598 instance=ExtResource("7_kvuet")]
-process_mode = 3
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=1268590288]
 tile_set = SubResource("TileSet_nrent")

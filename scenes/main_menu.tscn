@@ -54,6 +54,7 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="Play" type="Button" parent="Control/VBoxContainer" unique_id=1785979854]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 custom_maximum_size = Vector2(150, -1)
 layout_mode = 2
@@ -63,6 +64,7 @@ theme_override_constants/outline_size = 4
 text = "PLAY"
 
 [node name="Settings" type="Button" parent="Control/VBoxContainer" unique_id=2087344236]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 custom_maximum_size = Vector2(150, -1)
 layout_mode = 2
@@ -72,6 +74,7 @@ theme_override_constants/outline_size = 4
 text = "SETTINGS"
 
 [node name="Exit" type="Button" parent="Control/VBoxContainer" unique_id=1703425928]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 custom_maximum_size = Vector2(150, -1)
 layout_mode = 2

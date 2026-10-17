@@ -31,11 +31,13 @@ func _ready() -> void:
 	change_state(State.IDLE)
 
 func take_damage(damage: int) -> void:
+	if health == 0:
+		return
 	health = maxi(health - damage, 0)
 	flash_take_damage()
 	
 	if health == 0:
-		queue_free()
+		change_state(State.DIE)
 
 func shoot() -> void:
 	for i in 3:
@@ -66,6 +68,9 @@ func change_state(new_state: State) -> void:
 		State.ATTACK:
 			animation_player.play("move")
 			can_shoot = true
+		State.DIE:
+			animation_player.play("dead")
+			can_shoot = false
 
 func _physics_process(delta: float) -> void:
 	match current_state:
